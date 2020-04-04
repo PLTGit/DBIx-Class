@@ -92,10 +92,9 @@ if [[ -n "$tarball_assembled" ]] ; then
 
   # make sure we are retrying with newest CPAN possible
   #
-  # not running tests on CPAN.pm - they are not terribly slow,
-  # but https://rt.cpan.org/Ticket/Display.html?id=96437 sucks
-  installdeps CPAN
-  run_or_err "Make sure CPAN was upgraded to at least 2.10" "perl -M'CPAN 2.010' -e1"
+  # FIXME - trial CPAN to work around YAML breakage
+  installdeps 'CPAN~2.28'
+  run_or_err "Make sure CPAN was upgraded to at least 2.28" "perl -M'CPAN 2.28' -e1"
 
   run_or_err "Re-Configuring CPAN.pm" "perl -MCPAN -e '\
     CPAN::Config->load;
